@@ -13,11 +13,11 @@ soma = (req, resp, next) => {
     resp.setHeader('Content-Type', 'application/json');
     resp.charSet('UTF-8');
     
-    var x = req.body.x;
-    var y = req.body.y;
+    var x = parseInt(req.body.x);
+    var y = parseInt(req.body.y);
     var soma = x + y;
 
-    resp.send("Soma = " + soma);
+    resp.send("Soma = " + soma.toString());
     next();
 }
 
@@ -28,9 +28,9 @@ var server = resitfy.createServer({
 server.use(resitfy.plugins.bodyParser());
 
 server.get('/hello', helloWorld);
-server.get('/soma', soma);
+server.post('/soma', soma);
 
-var port = process.env.PORT || 5000;
+var port = process.env.PORT || 6000;
 
 server.listen(port, () => {
     console.log("%s rodando", server.name);
